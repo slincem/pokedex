@@ -1,20 +1,21 @@
 package com.lincz.pokedex.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lincz.pokedex.model.UserStatus;
+import com.lincz.pokedex.domain.UserStatus;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.UUID;
 
 
 @Getter
 @Builder
 public class UserPrincipal implements UserDetails {
 
-    private final Long userId;
+    private final UUID userId;
     private final String username;
     @JsonIgnore
     private final String password;

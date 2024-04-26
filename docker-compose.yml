@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: pokedex
-      MYSQL_USER: lincz
+      MYSQL_USER: pokedex_service
       MYSQL_PASSWORD: 12345
     volumes:
       - ../docker/volumes/mysql:/var/lib/mysql
