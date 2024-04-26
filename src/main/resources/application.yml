@@ -1,0 +1,7 @@
+security:
+  jwt:
+    secret-key: ultrasecretpokemonkey
+
+logging:
+  level:
+    org.springframework.security: DEBUG
