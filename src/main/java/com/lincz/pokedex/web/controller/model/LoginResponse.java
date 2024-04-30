@@ -1,4 +1,4 @@
-package com.lincz.pokedex.controller.model;
+package com.lincz.pokedex.web.controller.model;
 
 import lombok.Builder;
 import lombok.Getter;

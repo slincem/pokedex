@@ -1,4 +1,4 @@
-package com.lincz.pokedex.controller;
+package com.lincz.pokedex.web.controller;
 
 import com.lincz.pokedex.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;

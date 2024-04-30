@@ -1,7 +1,7 @@
-package com.lincz.pokedex.controller;
+package com.lincz.pokedex.web.controller;
 
-import com.lincz.pokedex.controller.model.LoginRequest;
-import com.lincz.pokedex.controller.model.LoginResponse;
+import com.lincz.pokedex.web.controller.model.LoginRequest;
+import com.lincz.pokedex.web.controller.model.LoginResponse;
 import com.lincz.pokedex.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

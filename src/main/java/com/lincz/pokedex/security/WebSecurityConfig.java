@@ -31,6 +31,7 @@ public class WebSecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomUserDetailService customUserDetailService;
+    private final PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain applicationSecurity(HttpSecurity http) throws Exception {
@@ -49,23 +50,19 @@ public class WebSecurityConfig {
                         "/v1/api-docs/**", "/swagger-ui/**",
                         "/swagger-ui.html", "/api/monitor/**", "/api/auth/**").permitAll()
                 .requestMatchers("/api/admin/**").hasAuthority(UserRole.ADMIN.name())
+                .requestMatchers("/api/v1/users").permitAll()
+                .requestMatchers("/api/v1/users/**").hasAuthority(UserRole.ADMIN.name())
                 .anyRequest().authenticated()
         );
 
         return http.build();
     }
 
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(customUserDetailService);
-        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
 

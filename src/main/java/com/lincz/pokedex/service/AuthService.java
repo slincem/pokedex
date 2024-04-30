@@ -1,6 +1,6 @@
 package com.lincz.pokedex.service;
 
-import com.lincz.pokedex.controller.model.LoginResponse;
+import com.lincz.pokedex.web.controller.model.LoginResponse;
 import com.lincz.pokedex.security.JwtIssuer;
 import com.lincz.pokedex.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
