@@ -3,16 +3,17 @@ package com.lincz.pokedex.service;
 import com.lincz.pokedex.domain.User;
 import com.lincz.pokedex.domain.UserRole;
 import com.lincz.pokedex.domain.UserStatus;
-import com.lincz.pokedex.exception.EmailAlreadyExistsException;
+import com.lincz.pokedex.exception.CredentialsAlreadyExistsException;
 import com.lincz.pokedex.repository.UserRepository;
 import com.lincz.pokedex.web.mappers.UserMapper;
 import com.lincz.pokedex.web.model.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,12 +56,23 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) {
-        log.info("Creating user: {}", userDto);
 
+        List<String> errors = new ArrayList<>();
         if (isEmailRegistered(userDto.getEmail())) {
-            throw new EmailAlreadyExistsException(
-                    "There is an account with that email address:" + userDto.getEmail());
+            log.error("Email already registered: {}", userDto.getEmail());
+            errors.add("There is an account with that email address: " + userDto.getEmail());
         }
+
+        if (isUsernameRegistered(userDto.getUsername())) {
+            log.error("Username already registered: {}", userDto.getUsername());
+            errors.add("There is an account with that username: " + userDto.getUsername());
+        }
+
+        if(!errors.isEmpty()) {
+            throw new CredentialsAlreadyExistsException(errors);
+        }
+
+        log.info("Creating user: {}", userDto);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = userMapper.userDtoToUser(userDto);
         return userMapper.userToUserDto(userRepository.save(user));
@@ -69,4 +81,9 @@ public class UserServiceImp implements UserService {
     private boolean isEmailRegistered(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
+
+    private boolean isUsernameRegistered(String username) {
+        return userRepository.findByUsername(username).isPresent();
+    }
+
 }
