@@ -7,7 +7,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
-public class CredentialsAlreadyExistsException extends RuntimeException {
+public class DataAlreadyExistsException extends RuntimeException {
 
     private final List<String> errors;
 

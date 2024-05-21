@@ -11,16 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController {
-
-    private final UserService userService;
-
+public interface UserController {
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody @Validated UserDto userDto) {
-        return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
-    }
-
+    ResponseEntity<UserDto> createUser(@RequestBody @Validated UserDto userDto);
 }

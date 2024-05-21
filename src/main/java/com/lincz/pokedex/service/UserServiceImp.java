@@ -3,7 +3,7 @@ package com.lincz.pokedex.service;
 import com.lincz.pokedex.domain.User;
 import com.lincz.pokedex.domain.UserRole;
 import com.lincz.pokedex.domain.UserStatus;
-import com.lincz.pokedex.exception.CredentialsAlreadyExistsException;
+import com.lincz.pokedex.exception.DataAlreadyExistsException;
 import com.lincz.pokedex.repository.UserRepository;
 import com.lincz.pokedex.web.mappers.UserMapper;
 import com.lincz.pokedex.web.model.UserDto;
@@ -69,7 +69,7 @@ public class UserServiceImp implements UserService {
         }
 
         if(!errors.isEmpty()) {
-            throw new CredentialsAlreadyExistsException(errors);
+            throw new DataAlreadyExistsException(errors);
         }
 
         log.info("Creating user: {}", userDto);

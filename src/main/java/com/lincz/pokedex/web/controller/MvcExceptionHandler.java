@@ -1,6 +1,6 @@
 package com.lincz.pokedex.web.controller;
 
-import com.lincz.pokedex.exception.CredentialsAlreadyExistsException;
+import com.lincz.pokedex.exception.DataAlreadyExistsException;
 import com.lincz.pokedex.web.controller.model.CustomErrorResponse;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +36,8 @@ public class MvcExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CredentialsAlreadyExistsException.class)
-    public ResponseEntity<CustomErrorResponse> emailAlreadyExistsErrorHandler(CredentialsAlreadyExistsException e) {
+    @ExceptionHandler(DataAlreadyExistsException.class)
+    public ResponseEntity<CustomErrorResponse> emailAlreadyExistsErrorHandler(DataAlreadyExistsException e) {
         CustomErrorResponse errorResponse = new CustomErrorResponse();
 
         e.getErrors().forEach(error -> {
