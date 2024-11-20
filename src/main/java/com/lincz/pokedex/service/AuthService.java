@@ -25,7 +25,7 @@ public class AuthService {
         var principal = (UserPrincipal) authentication.getPrincipal();
         var roles = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
 
-        var token = jwtIssuer.issue(Long.parseLong(principal.getUserId().toString()), principal.getUsername(), roles);
+        var token = jwtIssuer.issue(principal.getUserId().toString(), principal.getUsername(), roles);
         return LoginResponse.builder()
                 .accessToken(token)
                 .refreshToken("refreshToken Example")

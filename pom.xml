@@ -134,6 +134,31 @@
 					</compilerArgs>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.40.0</version> <!-- Usa la última versión estable disponible -->
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<images>
+						<image>
+							<name>slincem/pokedex:${project.version}</name> <!-- Cambia el nombre de la imagen según tu caso -->
+							<build>
+								<dockerFileDir>${project.basedir}</dockerFileDir> <!-- Ruta al Dockerfile -->
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

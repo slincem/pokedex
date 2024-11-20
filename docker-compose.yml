@@ -1,5 +1,10 @@
 version: '3.8'
 
+networks:
+  pokedex_network:
+    driver: bridge
+    name: pokedex_network
+
 services:
   mysql:
     image: mysql:latest
@@ -13,6 +18,8 @@ services:
       MYSQL_PASSWORD: 12345
     volumes:
       - ../docker/volumes/mysql:/var/lib/mysql
+    networks:
+      - pokedex_network
 
   redis:
     image: redis:latest
@@ -21,3 +28,5 @@ services:
       - "6379:6379"
     volumes:
       - ../docker/volumes/redis:/data
+    networks:
+      - pokedex_network

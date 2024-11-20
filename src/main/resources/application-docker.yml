@@ -1,0 +1,28 @@
+security:
+  jwt:
+    secret-key: ultrasecretpokemonkey
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    username: pokedex_service
+    password: 12345
+    url: jdbc:mysql://mysql:3306/pokedex?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    defer-datasource-initialization: true
