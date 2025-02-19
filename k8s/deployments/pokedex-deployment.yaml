@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pokedex-app
+  labels:
+    app: pokedex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pokedex
+  template:
+    metadata:
+      labels:
+        app: pokedex
+    spec:
+      containers:
+        - name: pokedex
+          image: slincem/pokedex:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/pokedex?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+            - name: SPRING_DATASOURCE_USERNAME
+              value: pokedex_service
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "12345"
+            - name: SPRING_REDIS_HOST
+              value: redis
+            - name: SPRING_REDIS_PORT
+              value: "6379"
+
