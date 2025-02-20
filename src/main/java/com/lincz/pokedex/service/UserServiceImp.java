@@ -4,6 +4,7 @@ import com.lincz.pokedex.domain.User;
 import com.lincz.pokedex.domain.UserRole;
 import com.lincz.pokedex.domain.UserStatus;
 import com.lincz.pokedex.exception.DataAlreadyExistsException;
+import com.lincz.pokedex.exception.NotFoundException;
 import com.lincz.pokedex.repository.UserRepository;
 import com.lincz.pokedex.web.mappers.UserMapper;
 import com.lincz.pokedex.web.model.UserDto;
@@ -29,9 +30,19 @@ public class UserServiceImp implements UserService {
     private static final String EXISTING_USERNAME = "linczz";
     private static final String EXISTING_USERNAME_ADMIN = "admin";
 
-    public Optional<User> findByUsername(String username) {
-        //return userRepository.findByUsername(username);
-        if(EXISTING_USERNAME.equalsIgnoreCase(username)) {
+    public Optional<User> findByUsername(String username) throws NotFoundException {
+
+        Optional<User> opUser = userRepository.findByUsername(username);
+
+        if(opUser.isPresent()) {
+            log.info("User found to log in: {}", opUser);
+            return opUser;
+        } else {
+            log.info("User not found when logging in: {}", username);
+            throw new NotFoundException("User not found");
+        }
+
+        /*if(EXISTING_USERNAME.equalsIgnoreCase(username)) {
             var user = User.builder()
                     .id(UUID.randomUUID())
                     .username(username)
@@ -51,7 +62,7 @@ public class UserServiceImp implements UserService {
             return Optional.of(user);
         }
 
-        return Optional.empty();
+        return Optional.empty();*/
     }
 
     @Override
@@ -72,9 +83,9 @@ public class UserServiceImp implements UserService {
             throw new DataAlreadyExistsException(errors);
         }
 
-        log.info("Creating user: {}", userDto);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = userMapper.userDtoToUser(userDto);
+        log.info("Creating user: {}", user);
         return userMapper.userToUserDto(userRepository.save(user));
     }
 

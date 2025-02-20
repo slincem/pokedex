@@ -3,6 +3,7 @@ package com.lincz.pokedex.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,13 +30,24 @@ public class User extends BaseEntity {
         this.status = status;
     }
 
+    @PrePersist
+    private void prePersist() {
+        if (this.role == null) {
+            this.role = UserRole.USER;
+        }
+        if (this.status == null) {
+            this.status = UserStatus.ACTIVE;
+        }
+    }
+
+
     private String username;
     private String email;
 
     @JsonIgnore
     private String password;
 
-    private UserRole role = UserRole.USER;
+    private UserRole role;
 
-    private UserStatus status = UserStatus.ACTIVE;
+    private UserStatus status;
 }
