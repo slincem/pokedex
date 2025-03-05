@@ -27,9 +27,6 @@ public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private static final String EXISTING_USERNAME = "linczz";
-    private static final String EXISTING_USERNAME_ADMIN = "admin";
-
     public Optional<User> findByUsername(String username) throws NotFoundException {
 
         Optional<User> opUser = userRepository.findByUsername(username);
@@ -41,28 +38,6 @@ public class UserServiceImp implements UserService {
             log.info("User not found when logging in: {}", username);
             throw new NotFoundException("User not found");
         }
-
-        /*if(EXISTING_USERNAME.equalsIgnoreCase(username)) {
-            var user = User.builder()
-                    .id(UUID.randomUUID())
-                    .username(username)
-                    .password("$2a$12$qcI1SulHdRvw5PtNWx8lNeEgb2UqYEEdR.Wo2rvwtezSN140NURvW") //test
-                    .role(UserRole.USER)
-                    .status(UserStatus.ACTIVE)
-                    .build();
-            return Optional.of(user);
-        } else if (EXISTING_USERNAME_ADMIN.equalsIgnoreCase(username)) {
-            var user = User.builder()
-                    .id(UUID.randomUUID())
-                    .username(username)
-                    .password("$2a$12$qcI1SulHdRvw5PtNWx8lNeEgb2UqYEEdR.Wo2rvwtezSN140NURvW") //test
-                    .status(UserStatus.ACTIVE)
-                    .role(UserRole.ADMIN)
-                    .build();
-            return Optional.of(user);
-        }
-
-        return Optional.empty();*/
     }
 
     @Override

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Set;
+import java.util.EnumSet;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class PokemonDto implements Serializable {
     private String name;
 
     @NotBlank(message = "type cannot be blank")
-    private Set<PokemonType> type;
+    private EnumSet<PokemonType> type;
 
     @NotBlank(message = "weight cannot be blank")
     private Double weight;

@@ -52,6 +52,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/admin/**").hasAuthority(UserRole.ADMIN.name())
                 .requestMatchers("/api/v1/users").permitAll()
                 .requestMatchers("/api/v1/users/**").hasAuthority(UserRole.ADMIN.name())
+                .requestMatchers("/api/v1/pokemons/**").permitAll()
                 .anyRequest().authenticated()
         );
 
