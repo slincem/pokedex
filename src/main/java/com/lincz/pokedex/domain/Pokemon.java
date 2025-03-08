@@ -1,7 +1,8 @@
 package com.lincz.pokedex.domain;
 
+import com.lincz.pokedex.domain.converters.EnumSetConverter;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.EnumSet;
-import java.util.Set;
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
@@ -31,7 +31,7 @@ public class Pokemon extends BaseEntity {
 
     private String name;
 
-    @Enumerated
+    @Convert(converter = EnumSetConverter.class)
     private EnumSet<PokemonType> type;
 
     private Double weight;
