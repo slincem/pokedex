@@ -15,4 +15,8 @@ public class JwtProperties {
      * Secret key used for issuing JWT tokens
      */
     private String secretKey;
+
+    private Long expirationTime;
+
+    private Long refreshExpirationTime;
 }

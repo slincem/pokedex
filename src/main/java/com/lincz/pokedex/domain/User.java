@@ -1,10 +1,7 @@
 package com.lincz.pokedex.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,7 +49,10 @@ public class User extends BaseEntity {
     private String password;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
 }
