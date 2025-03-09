@@ -30,8 +30,8 @@ public class PokemonControllerImp implements PokemonController {
     }
 
     @Override
-    public ResponseEntity<PokemonDto> findPokemonById(UUID uuid) {
-        return new ResponseEntity<>(pokemonService.findPokemonById(uuid), HttpStatus.OK);
+    public ResponseEntity<PokemonDto> findPokemonById(UUID id) {
+        return new ResponseEntity<>(pokemonService.findPokemonById(id), HttpStatus.OK);
     }
 
     @Override

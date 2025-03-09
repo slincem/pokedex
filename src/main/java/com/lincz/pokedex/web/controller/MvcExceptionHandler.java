@@ -1,6 +1,7 @@
 package com.lincz.pokedex.web.controller;
 
 import com.lincz.pokedex.exception.DataAlreadyExistsException;
+import com.lincz.pokedex.exception.NotFoundException;
 import com.lincz.pokedex.web.controller.model.CustomErrorResponse;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,10 @@ public class MvcExceptionHandler {
         });
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

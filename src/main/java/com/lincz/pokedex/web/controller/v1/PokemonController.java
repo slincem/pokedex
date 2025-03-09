@@ -28,9 +28,9 @@ public interface PokemonController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN, USER')")
-    ResponseEntity<PokemonDto> findPokemonById(@PathVariable UUID uuid);
+    ResponseEntity<PokemonDto> findPokemonById(@PathVariable UUID id);
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     @PreAuthorize("hasAuthority('ADMIN, USER')")
     ResponseEntity<PokemonDto> findPokemonByName(@PathVariable String name);
 
